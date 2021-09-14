@@ -1,7 +1,8 @@
 
 import { Switch, Route } from "react-router-dom";
 import Home from "./Pages/Home";
-import SingleMovie from "./Pages/SingleNews";
+import SingleNew from "./Pages/SingleNew";
+
 
 function App() {
   return (
@@ -10,8 +11,8 @@ function App() {
         <Route exact path="/">
           <Home />
         </Route>
-        <Route path="/movies/:id">
-          <SingleMovie />
+        <Route path="/article/:id">
+          <SingleNew />
         </Route>
       </Switch>
     </div>

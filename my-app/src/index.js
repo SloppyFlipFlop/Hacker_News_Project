@@ -3,19 +3,16 @@ import ReactDOM from "react-dom";
 import "./styles/main.css";
 import App from "./App";
 
-
 import { BrowserRouter as Router } from "react-router-dom";
-
-import { NewsProvider } from "./utils/context";
+import { AppProvider } from "./utils/context";
 
 ReactDOM.render(
   <React.StrictMode>
-    <NewsProvider>
+    <AppProvider>
       <Router>
         <App />
       </Router>
-    </NewsProvider>
+    </AppProvider>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
-

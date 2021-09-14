@@ -1,0 +1,28 @@
+@use '../themes/defaultTheme' as *;
+@use '../util/variables'as *;
+@use '../util/mixins'as *;
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .search-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    input {
+    outline: none;
+    text-align: center;
+    border: 1px solid lightblue;
+    border-radius: 1.5erm;
+    border-radius: 5px;
+    width: 200px;
+    height: fit-content;
+    font-size: 32px;
+    color: lightblue;}
+  }
+
+  // .news {
+
+  // }
+}

@@ -1,16 +1,17 @@
 import React from "react";
 
-import { useMovieContext } from "../utils/context";
+import { useAppContext } from "../utils/context";
+
 
 const SearchForm = () => {
-  const { query, setQuery, error } = useMovieContext();
+  const { query, setQuery, error } = useAppContext();
   return (
     <form onSubmit={(e) => e.preventDefault()} className="search-form">
-      <h2>Search Movie DB</h2>
+      <h2>Search Hacker News</h2>
       <input
         type="text"
         className="form-input"
-        value={query}
+        value={state.query}
         onChange={(e) => setQuery(e.target.value)}
       />
       {error.show && <div className="error">{error.msg}</div>}

@@ -1,20 +1,50 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect, useReducer } from "react";
 
-import { useFetch } from "./useFetch";
+import { reducer } from "./reducer";
 
-const NewsContext = React.createContext();
+const API_ENDPOINT = `https://hn.algolia.com/api/v1/search?query=`;
 
-export const NewsProvider = ({ children }) => {
-  const [query, setQuery] = useState("batman");
-  const { loading, error, news } = useFetch(`s=${query}&`);
+const initialState = {
+  loading: true,
+  hits: [],
+
+  page: 0,
+  query: "React",
+  nbPages: 0,
+};
+
+const AppContext = React.createContext();
+
+export const AppProvider = ({ children }) => {
+  
+  const [state, dispatch] = useReducer(reducer, initialState);
+
+  const fetchStories = async (url) => {
+    dispatch({ type: "SET_LOADING" });
+    try {
+      const response = await fetch(url);
+      const data = await response.json();
+      dispatch({ type: "SET_HITS", payload: data });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleSearch = (query) => {
+    dispatch({ type: "HANDLE_SEARCH", payload: query });
+  };
+
+  useEffect(() => {
+    fetchStories(`${API_ENDPOINT}query=${state.query}&page=${state.page}`);
+  }, [state.query, state.page]);
 
   return (
-    <NewsContext.Provider value={{ query, setQuery, loading, error, news }}>
+    <AppContext.Provider value={{ ...state, handleSearch,  }}>
       {children}
-    </NewsContext.Provider>
+    </AppContext.Provider>
   );
 };
 
-export const useNewsContext = () => {
-  return useContext(NewsContext);
+export const useAppContext = () => {
+  return useContext(AppContext);
 };
