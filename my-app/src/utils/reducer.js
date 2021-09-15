@@ -14,8 +14,14 @@ export const reducer = (state, action) => {
     case "HANDLE_SEARCH":
       return {
         ...state,
-        loading: false,
-        query: action.payload.query,
+        page: 0,
+        query: action.payload,
+      };
+
+    case "REMOVE_ARTICLE":
+      return {
+        ...state,
+        hits: state.hits.filter((hit) => hit.objectID !== action.payload),
       };
 
     default:
